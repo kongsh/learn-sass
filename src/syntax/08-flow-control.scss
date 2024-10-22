@@ -1,0 +1,67 @@
+@use "sass:color";
+@use "sass:list";
+
+@mixin size($width, $height: null, $rounded: null) {
+  width: $width;
+  @if $height != null {
+    height: $height;
+  } @else {
+    height: $width;
+  }
+
+  @if $rounded == sm {
+    border-radius: 2px;
+  } @else if $rounded == md {
+    border-radius: 4px;
+  } @else if $rounded == lg {
+    border-radius: 6px;
+  } @else if $rounded == xl {
+    border-radius: 8px;
+  } @else {
+    @error "#{$rounded} 키워드는 유효하지 않습니다.";
+  }
+}
+
+@mixin colorScale($color, $selector) {
+  @for $i from 1 through 5 {
+    #{$selector}:nth-child(#{$i}) {
+      background-color: color.scale($color, $lightness: $i * 15%);
+    }
+  }
+}
+
+// @include colorScale(#f00, ".container");
+
+$icons: search more arrow plus;
+
+@mixin bgIcons($icons) {
+  @each $icon in $icons {
+    .icon-#{$icon} {
+      background: url(/images/icons/#{$icon}.svg) no-repeat 0 0;
+    }
+  }
+}
+
+// @include bgIcons($icons);
+
+$headings: (
+  h1: 64px 1.2,
+  h2: 48px 1.2,
+  h3: 32px 1.2,
+  h4: 26px 1.4,
+);
+
+@each $name, $values in $headings {
+  $font-size: list.nth($values, 1);
+  $line-height: list.nth($values, 2);
+
+  #{$name} {
+    line-height: $line-height;
+    font-size: $font-size;
+    font-weight: bold;
+  }
+}
+
+// .box {
+//   @include size(100px, $rounded: xl);
+// }
