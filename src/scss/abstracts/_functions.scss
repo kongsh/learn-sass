@@ -1,0 +1,15 @@
+@use "sass:math";
+
+// 단위 제거 함수
+@function removeUnit($value) {
+  @return math.div($value, ($value * 0) + 1);
+}
+
+// px to rem
+@function rem($unit, $base: 16) {
+  @return math.div(removeUnit($unit), $base) * 1rem;
+}
+
+@function em($unit, $base) {
+  @return math.div(removeUnit($unit), $base) * 1em;
+}
