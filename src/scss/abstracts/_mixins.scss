@@ -470,7 +470,7 @@ $breakpoints: (
   $row-gap: if($row-gap == null, $column-gap, $row-gap);
 
   display: grid;
-  grid-template-columns: repeat($column-count, minmax(320px, 1fr));
+  grid-template-columns: repeat($column-count, minmax(280px, 1fr));
   gap: $row-gap $column-gap;
 }
 
